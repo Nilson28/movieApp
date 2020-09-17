@@ -11,7 +11,7 @@ const RederMenuItem = ({ movie }) => {
         );
     })
     return (
-        <Link to={`/${movie.id}`}>
+        <Link to={`/user/home/${movie.id}`}>
             <Card>
                 <CardImg height="85%" src={movie.image} alt={movie.name} />
                 <CardBody height="15%" style={{padding: '3px'}}>
@@ -25,8 +25,9 @@ const RederMenuItem = ({ movie }) => {
             </Card>
         </Link>
     );
-
 }
+
+
 
 const Home = (props) => {
 
@@ -48,6 +49,8 @@ const Home = (props) => {
             </div>
             <div className="row">
                 {menu}
+            </div>
+            <div className="row">
             </div>
         </div>
     )

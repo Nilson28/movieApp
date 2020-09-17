@@ -60,3 +60,31 @@ address{
   height: 350px;
   background-color: rgb(224, 219, 219);
 }
+
+.contenido-tab{
+  display: flex;
+  align-self: center;
+}
+
+.tabs{
+  height: 100%;
+  display: flex;
+  flex-direction: column;
+}
+.tab{
+  max-height: min-content;
+  display: column;
+  width: 100%;
+  border-bottom: 1px solid #f0f0f0;
+}
+.tabs .tab a{
+  color: #6BA0D5;
+}
+.tabs .tab a:hover, .tabs .tab a.active {
+  background-color: transparent;
+  color: #043D75;
+}
+.tabs .tab a:focus, .tabs .tab a:focus.active {
+  background-color: #92BAE2;
+  outline: none;
+}
