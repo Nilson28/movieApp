@@ -14,9 +14,9 @@ class App extends Component {
       //<Provider store={store}>
       <BrowserRouter>
         <Switch location={this.props.location}>
-          <Route path='/home' component={Main} />
+          <Route path='/user' component={Main} />
           <Route path='/DashBoard' component={DashBoard} />
-          <Redirect to="/home" />
+          <Redirect to='/user/home'/>
         </Switch>
       </BrowserRouter>
       //</Provider>

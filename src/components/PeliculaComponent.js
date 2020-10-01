@@ -44,11 +44,11 @@ export default function PeliculaComponent(props) {
                     </Card>
                 </div>
                 <div className="col-12 col-sm-9 p-5">
-                    <p>{props.movie.name}</p>
+                    <h3 style={{color: "#715696"}}>Nombre:<i style={{color: "black"}}>{props.movie.name}</i></h3>
                     <hr />
-                    <p>{props.movie.duration}</p>
+                    <p style={{color: "#715696"}}>{props.movie.duration}</p>
                     <hr />
-                    <p>{props.movie.description}</p>
+                    <p style={{color: "#715696"}}>{props.movie.description}</p>
                     <hr />
                     {generos}
                 </div>

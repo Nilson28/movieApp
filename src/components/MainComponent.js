@@ -48,9 +48,8 @@ class MainComponent extends Component {
       <div>
         <Header />
         <Switch location={this.props.location}>
-          <Route path='/home' component={HomePage} />
-          <Route path='/home/:id' component={MovieWithId} />
-          <Redirect to="/home" />
+          <Route path='/user/home' component={HomePage} />
+          <Route path='/user/:id' component={MovieWithId} />
         </Switch>
       </div>
     );

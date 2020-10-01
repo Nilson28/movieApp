@@ -11,7 +11,7 @@ const RederMenuItem = ({ movie }) => {
         );
     })
     return (
-        <Link to={`/user/home/${movie.id}`}>
+        <Link to={`/user/${movie.id}`}>
             <Card>
                 <CardImg height="85%" src={movie.image} alt={movie.name} />
                 <CardBody height="15%" style={{padding: '3px'}}>
