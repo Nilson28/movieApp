@@ -9,41 +9,52 @@ import {
   BreadcrumbItem,
   CardBody,
   CardSubtitle,
+  Form,
+  FormGroup,
+  Input,
+  Button
 } from "reactstrap";
 
 export default function PeliculaComponent() {
   const { id: movie_id } = useParams();
-  const user_id = JSON.parse(localStorage.getItem('user')).user_id
+  const user_id = JSON.parse(localStorage.getItem('user')).user_id;
+
   const [loaders, setLoaders] = useState({
     initialLoader: true,
     commentLoader: false
   });
-  const addComment = () => {
+
+  const [comment, setComment] = useState('');
+
+  const onChange1 = (event) => {
+    setComment(event.target.value)
+  }
+
+  const addComment = (e) => {
+    e.preventDefault()
     setLoaders((pre) => ({ ...pre, commentLoader: true }));
-    console.log("user_id: ",user_id)
     fetch(`http://localhost:3333/api/v1/comment`, {
-        method: 'POST',
-        headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify({
-            user_id,
-            pelicula_id: movie_id,
-            comment: "El comentario mi socio"
-        })
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify({
+        user_id,
+        pelicula_id: movie_id,
+        comment: comment
+      })
     })
-    .then((response) => response.json())
-    .then((data) => {
-        setMovie((pre) => ({...pre, comments: [...pre.comments, data]}));
+      .then((response) => response.json())
+      .then((data) => {
+        setMovie((pre) => ({ ...pre, comments: [...pre.comments, data] }));
         setLoaders((pre) => ({ ...pre, commentLoader: false }));
-    })
+      })
   }
   const [movie, setMovie] = useState(null);
   useEffect(() => {
-    console.log("GOLA");
     fetch(`http://localhost:3333/api/v1/pelicula/${movie_id}`)
       .then((response) => response.json())
       .then((data) => {
-          setMovie(data);
-          setLoaders((pre) => ({ ...pre, initialLoader: false }));
+        setMovie(data);
+        setLoaders((pre) => ({ ...pre, initialLoader: false }));
       });
   }, []);
 
@@ -51,32 +62,25 @@ export default function PeliculaComponent() {
   if (loaders.initialLoader) {
     return <h1>Cargando mimada</h1>;
   }
-
-//   if (!movie) {
-//     return <h1>Cargando mimada</h1>;
-//   }
-
   return (
     <div className="container">
       <div className="row">
-        <div className="col-12 col-sm-3">
+        <div className="col-12 col-sm-3 mr-1 mt-5">
           <Card>
             <CardImg height="100%" src={movie.image} alt={movie.name} />
           </Card>
         </div>
-        <div className="col-12 col-sm-9 p-5">
-          <h3 style={{ color: "#715696" }}>
-            Nombre:<i style={{ color: "black" }}>{movie.name}</i>
-          </h3>
+        <div className="col-12 col-sm-8 p-5 d">
+          <h3 style={{ color: "#715696" }}>Nombre: </h3><p style={{ color: "black" }}>{movie.name}</p>
           <hr />
-          <p style={{ color: "#715696" }}>{movie.duration}</p>
+          <h4 style={{ color: "#715696" }}>Duración:</h4><p style={{ color: "black" }}>{movie.duration}</p>
           <hr />
-          <p style={{ color: "#715696" }}>{movie.description}</p>
+          <h4 style={{ color: "#715696" }}>Descripción: </h4><p style={{ color: "black" }}>{movie.description}</p>
           <hr />
           {movie.generos.map((genero, key) => {
             return (
               <div key={key}>
-                <i>{genero.name}</i>
+                <h4 style={{ color: "#715696" }}>Generos: </h4>  <p>{genero.name}</p>
               </div>
             );
           })}
@@ -84,7 +88,11 @@ export default function PeliculaComponent() {
       </div>
       <hr />
       <div className="row">
-        <div className="col-12 col-sm-8 offset-2"></div>
+        <div className="col-12 col-sm-8 offset-2">
+          <div className="embed-responsive embed-responsive-16by9">
+            <iframe className="embed-responsive-item" src={movie.video}></iframe>
+          </div>
+        </div>
       </div>
       <hr />
       <div className="row">
@@ -96,17 +104,24 @@ export default function PeliculaComponent() {
           {movie.comments.map((comment, key) => {
             return (
               <div key={key}>
-                <i>user: {comment.user_id}</i>
+                <i>Usuario: {comment.users.user_nick}</i>
                 <p>{comment.comment}</p>
-                <i>fecha: {comment.created_at}</i>
+                <i>Fecha: {comment.created_at}</i>
                 <hr />
               </div>
             );
           })}
         </div>
       </div>
-      <button onClick={addComment}> hola </button>
-      {loaders.commentLoader && <p>Creando comentario</p>}
+      <form onSubmit={addComment}>
+        <div className="row">
+          <div className="col-12">
+            <input type="text" onChange={onChange1} name="comment" value={comment} placeholder="Commentario" />
+          </div>
+        </div>
+        <button type="submit" value="submit" color="primary">Comentar</button>
+      </form>
+      {loaders.commentLoader && <p>Enviando comentario</p>}
     </div>
   );
 }

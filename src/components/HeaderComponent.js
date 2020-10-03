@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 import { Navbar, NavbarBrand, Nav, NavbarToggler, Collapse, NavItem, Jumbotron, Button, Modal, ModalHeader, ModalBody, Form, FormGroup, Input, Label } from 'reactstrap';
 import { NavLink } from 'react-router-dom';
+import Axios from 'axios';
 
 export default class HeaderComponent extends Component {
 
@@ -27,10 +28,7 @@ export default class HeaderComponent extends Component {
 
     handleLogin = (event) => {
         this.toggleModal();
-        alert("Username: " + this.username.value + " Password: " + this.password.value
-            + " Remember: " + this.remember.checked);
         event.preventDefault();
-
     }
 
     render() {
@@ -77,13 +75,6 @@ export default class HeaderComponent extends Component {
                                 <Label htmlFor="password">Password</Label>
                                 <Input type="password" id="password" name="password"
                                     innerRef={(input) => this.password = input} />
-                            </FormGroup>
-                            <FormGroup check>
-                                <Label check>
-                                    <Input type="checkbox" name="remember"
-                                        innerRef={(input) => this.remember = input} />
-                                    Remember me
-                                </Label>
                             </FormGroup>
                             <Button type="submit" value="submit" color="primary">Login</Button>
                         </Form>

@@ -15,7 +15,7 @@ import { ConfigureStore } from './redux/configureStore'; */
 //const store = ConfigureStore();
 
 function App(props) {
-  localStorage.setItem('user', JSON.stringify({user_id: 'Rubunu'}))
+  localStorage.setItem('user', JSON.stringify({user_id: 1}))
   return (
     //<Provider store={store}>
     <BrowserRouter>
