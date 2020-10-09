@@ -14,7 +14,7 @@ export default class TableGenComponent extends Component {
   }
 
   handleClick = async(row) => {
-    await axios.delete(`http://localhost:3333/api/v1/genero/${row.id}`)
+    await axios.delete(`${process.env.REACT_APP_API_END_POINT}/api/v1/genero/${row.id}`)
       .then((res) => {
         if(res.status === 202){
           toast("El registro se elimino");

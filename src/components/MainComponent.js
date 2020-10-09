@@ -18,7 +18,7 @@ class MainComponent extends Component {
   }
 
   componentDidMount() {
-    axios.get("http://localhost:3333/api/v1/pelicula").then((response) => {
+    axios.get(`${process.env.REACT_APP_API_END_POINT}/api/v1/pelicula/`).then((response) => {
       //console.log(response.data)
       this.setState({
         movies: response.data,

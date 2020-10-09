@@ -16,7 +16,7 @@ export default class TablePeliComponent extends Component {
   handleClick = async (row) => {
       console.log(row)
     // await axios
-    //   .delete(`http://localhost:3333/api/v1/pelicula/${row.id}`)
+    //   .delete(`${process.env.REACT_APP_API_END_POINT}/api/v1/pelicula/${row.id}`)
     //   .then((res) => {
     //     if (res.status === 202) {
     //       toast.success("El registro se elimino");

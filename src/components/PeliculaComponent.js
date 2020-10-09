@@ -25,7 +25,7 @@ export default function PeliculaComponent() {
     try {
       const user_id = JSON.parse(localStorage.getItem("user")).id;
       const token = JSON.parse(localStorage.getItem("access")).token;
-      const commentDone = await fetch(`http://localhost:3333/api/v1/comment`, {
+      const commentDone = await fetch(`${process.env.REACT_APP_API_END_POINT}/api/v1/comment`, {
         method: "POST",
         headers: {
           "Content-Type": "application/json",
@@ -52,7 +52,7 @@ export default function PeliculaComponent() {
 
   const [movie, setMovie] = useState(null);
   useEffect(() => {
-    fetch(`http://localhost:3333/api/v1/pelicula/${movie_id}`)
+    fetch(`${process.env.REACT_APP_API_END_POINT}/api/v1/pelicula/${movie_id}`)
       .then((response) => response.json())
       .then((data) => {
         setMovie(data);

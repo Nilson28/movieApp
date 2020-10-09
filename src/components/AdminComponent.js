@@ -19,7 +19,7 @@ class AdminComponent extends Component {
   }
 
   componentDidMount() {
-    axios.get(`http://localhost:3333/api/v1/genero/`).then((res) => {
+    axios.get(`${process.env.REACT_APP_API_END_POINT}/api/v1/genero/`).then((res) => {
       var op = [];
       op = res.data.map((genero) => {
         return { value: genero.id, label: genero.name };
@@ -48,7 +48,7 @@ class AdminComponent extends Component {
       name: this.generoName.value,
       restriction: this.clasific.value,
     };
-    axios.post(`http://localhost:3333/api/v1/genero/`, data).then((res) => {
+    axios.post(`${process.env.REACT_APP_API_END_POINT}/api/v1/genero/`, data).then((res) => {
       if (res.status === 202) {
         toast("Registro exitoso");
       }
@@ -64,7 +64,7 @@ class AdminComponent extends Component {
       duration: this.duration.value,
       description: this.description.value,
     };
-    axios.post(`http://localhost:3333/api/v1/pelicula/`, data).then((res) => {
+    axios.post(`${process.env.REACT_APP_API_END_POINT}/api/v1/pelicula/`, data).then((res) => {
       if (res.status === 202) {
         toast("Registro exitoso");
       }
