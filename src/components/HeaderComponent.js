@@ -1,4 +1,5 @@
 import React, { Component } from "react";
+import { withRouter } from "react-router-dom";
 import {
   Navbar,
   NavbarBrand,
@@ -17,15 +18,17 @@ import {
   Label,
 } from "reactstrap";
 import { NavLink } from "react-router-dom";
-import Axios from "axios";
+import axios from "axios";
 
-export default class HeaderComponent extends Component {
+class HeaderComponent extends Component {
   constructor(props) {
     super(props);
 
     this.state = {
       isNavOpen: false,
       isModalOpen: false,
+      isLogin: false,
+      user: {},
     };
   }
 
@@ -42,9 +45,30 @@ export default class HeaderComponent extends Component {
   };
 
   handleLogin = (event) => {
-    this.toggleModal();
-    localStorage.setItem('user', JSON.stringify({user_id: 1}))
     event.preventDefault();
+    this.toggleModal();
+    const data = {
+      user_nick: this.username.value,
+      password: this.password.value,
+    };
+    axios.post(`http://localhost:3333/api/v1/users/login`, data).then((res) => {
+      if (res.status === 202) {
+        this.setState({
+          isLogin: true,
+          user: res.data.user,
+        });
+        const token = res.data.access;
+        const user = res.data.user;
+        localStorage.setItem("access", JSON.stringify(token));
+        localStorage.setItem("user", JSON.stringify(user));
+        if (res.data.user.type_user) {
+          // eslint-disable-next-line
+          this.props.history.push({
+            pathname: "/DashBoard",
+          });
+        }
+      }
+    });
   };
 
   render() {
@@ -65,10 +89,38 @@ export default class HeaderComponent extends Component {
                 </NavItem>
               </Nav>
               <Nav className="ml-auto" navbar>
-                <NavItem>
-                  <Button outline onClick={this.toggleModal}>
-                    <span className="fa fa-sign-in fa-lg"></span> Login
+                <NavItem className="m-1">
+                  {!this.state.isLogin ? (
+                    <Button outline onClick={this.toggleModal}>
+                      <span className="fa fa-sign-in fa-lg"></span> Login
+                    </Button>
+                  ) : (
+                    <div>
+                      <div className="navbar-text mr-3">
+                        {this.state.user.user_nick}
+                      </div>
+                      <Button outline onClick={this.handleLogout}>
+                        <span className="fa fa-sign-out fa-lg"></span> Logout
+                      </Button>
+                    </div>
+                  )}
+                </NavItem>
+                <NavItem className="m-1">
+                {!this.state.isLogin ? (
+                  <Button
+                    outline
+                    role="link"
+                    onClick={() => {
+                      this.props.history.push({
+                        pathname: "/user/registro",
+                      });
+                    }}
+                  >
+                    <span className="fa fa-user fa-lg"></span> No tienes cuenta?
                   </Button>
+                ) :(
+                  null
+                )}
                 </NavItem>
               </Nav>
             </Collapse>
@@ -106,7 +158,7 @@ export default class HeaderComponent extends Component {
                   innerRef={(input) => (this.password = input)}
                 />
               </FormGroup>
-              <Button type="submit" value="submit" color="primary">
+              <Button type="submit" value="submit" color="danger">
                 Login
               </Button>
             </Form>
@@ -116,3 +168,5 @@ export default class HeaderComponent extends Component {
     );
   }
 }
+
+export default withRouter(HeaderComponent);

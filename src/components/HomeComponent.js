@@ -1,24 +1,25 @@
 import React from 'react';
-import { Card, CardImg, CardImgOverlay, CardTitle, Breadcrumb, BreadcrumbItem, CardBody, CardSubtitle } from 'reactstrap';
+import { Card, CardImg, CardImgOverlay, CardBody, CardSubtitle } from 'reactstrap';
 import { Link } from 'react-router-dom';
+import Loading from './LoadigComponent';
 
 
 const RederMenuItem = ({ movie }) => {
 
-    const generoName = movie.generos.map((genero)=>{
-        return(
-            <CardSubtitle key={genero.name}>{genero.name}</CardSubtitle>
+    const generoName = movie.generos.map((genero) => {
+        return (
+            <span key={genero.name}>{genero.name} </span>
         );
     })
     return (
         <Link to={`/user/${movie.id}`}>
             <Card>
-                <CardImg height="85%" src={movie.image} alt={movie.name} />
-                <CardBody height="15%" style={{padding: '3px'}}>
+                <CardImg height="92%" src={movie.image} alt={movie.name} />
+                <CardImgOverlay><strong>{movie.name}</strong></CardImgOverlay>
+                <CardBody height="8%" style={{ padding: '5px' }}>
                     <div className="row">
-                        <CardImgOverlay style={{color: "white", height: "15px"}}>{movie.name}</CardImgOverlay>
                         <div className="col-12">
-                            {generoName}
+                            <CardSubtitle>{generoName}</CardSubtitle>
                         </div>
                     </div>
                 </CardBody>
@@ -33,28 +34,38 @@ const Home = (props) => {
 
     const menu = props.movies.map((movie) => {
         return (
-            <div key={movie.id} className="col-12 col-md-3 mb-2">
+
+            <div key={movie.id} className="col-7 col-sm-6 col-md-3 mb-2">
                 <RederMenuItem movie={movie} /* onClick={props.onClick} */ />
             </div>
+
         );
     });
 
-    return (
-        <div className="container">
-            <div className="row">
-                <div className="col-12">
-                    <h3>Agregadas recientemente</h3>
-                    <hr />
+    if(props.isLoading){
+        return (
+            <div className="container">
+                <div className="row">
+                    <Loading />
                 </div>
             </div>
-            <div className="row">
-                {menu}
+        );
+    }else{
+        return (
+            <div className="container">
+                <div className="row">
+                    <div className="col-12">
+                        <h3>Agregadas recientemente</h3>
+                        <hr />
+                    </div>
+                </div>
+                <div className="row">
+                    {menu}
+                </div>
             </div>
-            <div className="row">
-            </div>
-        </div>
-    )
-
+        )
+    
+    }
 }
 
 export default Home;

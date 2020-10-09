@@ -11,9 +11,13 @@
 }
 
 .footer{
-  background-color: #D1C4E9;
-  margin:0px auto;
+  background-color: #ad1328;
+  margin-top: 20px;
+  margin-bottom:0px auto;
+  margin-left: 0px auto;
+  margin-right: 0px auto;
   padding: 20px 0px 20px 0px;
+  color: #f0f0f0;
 }
 .jumbotron {
   padding:70px 30px 70px 30px;
@@ -87,4 +91,22 @@ address{
 .tabs .tab a:focus, .tabs .tab a:focus.active {
   background-color: #92BAE2;
   outline: none;
+}
+
+.list-group-item.active {
+  border-color: white;
+}
+
+a {
+  color: white;
+  text-decoration: none;
+}
+
+a:hover {
+  color: white;
+  text-decoration: none;
+}
+
+.card-body {
+  background-color: #ad1328;
 }
