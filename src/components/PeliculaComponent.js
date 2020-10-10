@@ -50,13 +50,17 @@ export default function PeliculaComponent() {
     setLoaders((pre) => ({ ...pre, commentLoader: false }));
   };
 
+  const setfiltres = async(data) =>{
+    await setMovie(data);
+    await setLoaders((pre) => ({ ...pre, initialLoader: false }));
+  }
+
   const [movie, setMovie] = useState(null);
   useEffect(() => {
     fetch(`${process.env.REACT_APP_API_END_POINT}/api/v1/pelicula/${movie_id}`)
       .then((response) => response.json())
       .then((data) => {
-        setMovie(data);
-        setLoaders((pre) => ({ ...pre, initialLoader: false }));
+        setfiltres(data)
       });
   }, []);
 
