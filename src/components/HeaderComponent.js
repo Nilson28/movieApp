@@ -19,6 +19,7 @@ import {
 } from "reactstrap";
 import { NavLink } from "react-router-dom";
 import axios from "axios";
+import imagen from '../assets/logo.png';
 
 class HeaderComponent extends Component {
   constructor(props) {
@@ -78,7 +79,7 @@ class HeaderComponent extends Component {
           <div className="container">
             <NavbarToggler onClick={this.toggleNav} />
             <NavbarBrand className="mr-auto" href="/">
-              <img src="" height="30" width="41" alt="MovieApp" />
+              <img src={imagen} height="30" width="41" alt="MovieApp" />
             </NavbarBrand>
             <Collapse isOpen={this.state.isNavOpen} navbar>
               <Nav navbar>

@@ -105,6 +105,13 @@ class AdminComponent extends Component {
                 <ListGroup.Item
                   className="text-center bg-danger text-white"
                   action
+                  href="#link4"
+                >
+                  Consultar Peliculas
+                </ListGroup.Item>
+                <ListGroup.Item
+                  className="text-center bg-danger text-white"
+                  action
                   href="#link6"
                 >
                   <a href="/user/home">

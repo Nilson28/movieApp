@@ -12,16 +12,15 @@ export default class FooterComponent extends Component {
                             <ul className="list-unstyled">
                                 <li><Link to='/user/home'>Home</Link></li>
                                 <li><Link to='/user/registro'>Registro</Link></li>
-
                             </ul>
                         </div>
                         <div className="col-7 col-sm-5">
                             <h5>Integrantes</h5>
 
                                 <i className="fa fa-user fa-lg"></i>:Nilson cardona<br />
-                                <i className="fa fa-user fa-lg"></i>:               <br />
-                                <i className="fa fa-user fa-lg"></i>:               <br />
-                                <i className="fa fa-user fa-lg"></i>:               <br />
+                                <i className="fa fa-user fa-lg"></i>:Luis niño     <br />
+                                <i className="fa fa-user fa-lg"></i>:Steven otalvaro<br />
+                                <i className="fa fa-user fa-lg"></i>:Carolina caicedo<br />
                         </div>
                         <div className="col-12 col-sm-4 align-self-center">
                             <div className="text-center">

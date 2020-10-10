@@ -26,16 +26,16 @@ export default class TablePeliComponent extends Component {
   };
 
   async componentDidMount() {
-    await axios.get("http://127.0.0.1:3333/api/v1/pelicula").then((res) => {
+    await axios.get(`${process.env.REACT_APP_API_END_POINT}/api/v1/pelicula`).then((res) => {
       var op = [];
       op = res.data.map((pelicula) => {
           console.log(pelicula.duration)
         return {
           id: pelicula.id,
-        //   name: pelicula.name,
-        //   generos: pelicula.generos,
-        //   image: pelicula.image,
-        //   video: pelicula.video,
+          name: pelicula.name,
+          generos: pelicula.generos,
+          image: pelicula.image,
+          video: pelicula.video,
           duration: pelicula.duration,
           created_at: pelicula.created_at,
           updated_at: pelicula.updated_at
@@ -49,31 +49,31 @@ export default class TablePeliComponent extends Component {
             selector: "ID",
             omit: true
           },
-        //   {
-        //     name: "Nombre",
-        //     selector: "Nombre",
-        //     sortable: true,
-        //   },
-        //   {
-        //     name: "Imagen",
-        //     selector: "Imagen",
-        //     sortable: true,
-        //   },
-        //   {
-        //     name: "Video",
-        //     selector: "Video",
-        //     sortable: true,
-        //   },
+          {
+            name: "Nombre",
+            selector: "Nombre",
+            sortable: true,
+          },
+          {
+            name: "Imagen",
+            selector: "Imagen",
+            sortable: true,
+          },
+          {
+            name: "Video",
+            selector: "Video",
+            sortable: true,
+          },
           {
             name: "Duration",
             selector: "Duration",
             sortable: true,
           },
-        //   {
-        //     name: "Description",
-        //     selector: "Description",
-        //     sortable: true,
-        //   },
+          {
+            name: "Description",
+            selector: "Description",
+            sortable: true,
+          },
           {
             name: "created_at",
             selector: "created_at",

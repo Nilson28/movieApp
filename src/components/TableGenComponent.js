@@ -25,7 +25,7 @@ export default class TableGenComponent extends Component {
 
   async componentDidMount() {
 
-    await axios.get('http://127.0.0.1:3333/api/v1/genero')
+    await axios.get(`${process.env.REACT_APP_API_END_POINT}/api/v1/genero`)
       .then((res) => {
         var op = [];
         op = res.data.map((genero) => {

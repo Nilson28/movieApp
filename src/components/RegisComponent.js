@@ -27,7 +27,7 @@ export default class RegisComponent extends Component {
       gender: this.state.selectGen,
       age: this.age.value,
     };
-    axios.post(`http://127.0.0.1:3333/api/v1/users`, data).then((res) => {
+    axios.post(`${process.env.REACT_APP_API_END_POINT}/api/v1/users`, data).then((res) => {
       if (res.status === 202) {
         toast.success("Registro exitoso");
       }
