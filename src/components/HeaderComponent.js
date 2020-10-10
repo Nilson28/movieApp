@@ -72,6 +72,15 @@ class HeaderComponent extends Component {
     });
   };
 
+  handleLogout = (e) =>{
+    e.preventDefault()
+    this.setState({
+      isLogin: false,
+    });
+    localStorage.setItem("access", JSON.stringify(''));
+    localStorage.setItem("user", JSON.stringify(''));
+  }
+
   render() {
     return (
       <div>
